@@ -13,6 +13,16 @@ define('SAUCAL_PLUGIN_URL', plugin_dir_url(__FILE__));
 include_once('lib/widget.php');
 include_once('lib/post_form.php');
 
+
+function saucal_front_script()
+{
+
+    wp_enqueue_style('style',  SAUCAL_PLUGIN_URL . "/assets/style.css");
+}
+
+add_action('wp_enqueue_scripts', 'saucal_front_script');
+
+
 function saucal_employee_endpoint()
 {
     add_rewrite_endpoint('saucal_employee', EP_ROOT | EP_PAGES);
@@ -21,16 +31,7 @@ function saucal_employee_endpoint()
 
 add_action('init', 'saucal_employee_endpoint');
 
-// ------------------
-// 2. Add new query var
 
-function saucal_employee_list_query_vars($vars)
-{
-    $vars[] = 'saucal_employee';
-    return $vars;
-}
-
-add_filter('query_vars', 'saucal_employee_list_query_vars', 0);
 
 // ------------------
 // 3. Insert the new endpoint into the My Account menu
@@ -53,6 +54,7 @@ function saucal_employee_list_content()
 }
 
 add_action('woocommerce_account_saucal_employee_endpoint', 'saucal_employee_list_content');
+
 
 add_filter('the_title', 'saucal_employee_list_endpoint_title');
 function saucal_employee_list_endpoint_title($title)
