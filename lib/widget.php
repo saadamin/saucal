@@ -59,7 +59,9 @@ class saucal_employee_widget extends WP_Widget
         foreach ($remote->data as $row => $col) {
 
             //API call END
-            //If api call does not work. Sometime it limits request. uncomment if API requests do not work.
+
+
+            //If api call does not work. Sometime it limits request. uncomment if API requests do not work or shows errors also comment from line 46-59.
             //JSON file upload START
             // $string = file_get_contents(SAUCAL_PLUGIN_URL . "assets/data.json");
             // $r = json_decode($string, true);
