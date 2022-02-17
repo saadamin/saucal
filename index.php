@@ -10,3 +10,5 @@ License: GPLv2 or later
 Text Domain: saucal
 */
 define('SAUCAL_PLUGIN_URL', plugin_dir_url(__FILE__));
+include_once('lib/widget.php');
+include_once('lib/post_form.php');
