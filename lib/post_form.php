@@ -20,6 +20,40 @@ class HighestSalaryRange
      */
     function handleForm()
     {
+        if (!$this->isFormSubmitted())
+            return false;
+
+        // http://php.net/manual/en/function.filter-input-array.php
+        $data = filter_input_array(INPUT_POST, array(
+            'HighestSalaryRange'   => FILTER_DEFAULT
+        ));
+
+        $data = wp_unslash($data);
+        $data = array_map('trim', $data);
+
+        // You might also want to more aggressively sanitize these fields
+        // By default WordPress will handle it pretty well, based on the current user's "unfiltered_html" capability
+
+        $data['HighestSalaryRange']   = sanitize_text_field($data['HighestSalaryRange']);
+
+        $this->data = $data;
+
+        if (!$this->isNonceValid())
+            $this->errors[] = 'Security check failed, please try again.';
+
+        if (intval($data['HighestSalaryRange']) === 0)
+            $this->errors[] = 'Please enter a valid number';
+
+        if (!$this->errors) {
+
+            if (update_user_meta(get_current_user_id(), 'HighestSalaryRange', intval($data['HighestSalaryRange']))) {
+                // Redirect to avoid duplicate form submissions
+                wp_redirect(add_query_arg('success', 'true'));
+                exit;
+            } else {
+                $this->errors[] = 'Whoops, please try again.';
+            }
+        }
     }
 
     /**
