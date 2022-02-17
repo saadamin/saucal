@@ -1,0 +1,10 @@
+span.wid_val {
+    display: block;
+}
+
+p.wid_div {
+    overflow: hidden;
+    display: block;
+    border: 1px outset;
+    padding: 14px;
+}
