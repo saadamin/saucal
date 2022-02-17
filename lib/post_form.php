@@ -15,6 +15,41 @@ class HighestSalaryRange
     }
 
 
+    /**
+     * Process the form and redirect if sucessful.
+     */
+    function handleForm()
+    {
+    }
+
+    /**
+     * Use output buffering to *return* the form HTML, not echo it.
+     *
+     * @return string
+     */
+    function getForm()
+    {
+    }
+
+    /**
+     * Has the form been submitted?
+     *
+     * @return bool
+     */
+    function isFormSubmitted()
+    {
+        return isset($_POST['submitForm']);
+    }
+
+    /**
+     * Has the form been successfully processed?
+     *
+     * @return bool
+     */
+    function isFormSuccess()
+    {
+        return filter_input(INPUT_GET, 'success') === 'true';
+    }
 
     /**
      * Is the nonce field valid?
