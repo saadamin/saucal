@@ -13,6 +13,46 @@ define('SAUCAL_PLUGIN_URL', plugin_dir_url(__FILE__));
 include_once('lib/widget.php');
 include_once('lib/post_form.php');
 
+function saucal_employee_endpoint()
+{
+    add_rewrite_endpoint('saucal_employee', EP_ROOT | EP_PAGES);
+    flush_rewrite_rules();
+}
+
+add_action('init', 'saucal_employee_endpoint');
+
+// ------------------
+// 2. Add new query var
+
+function saucal_employee_list_query_vars($vars)
+{
+    $vars[] = 'saucal_employee';
+    return $vars;
+}
+
+add_filter('query_vars', 'saucal_employee_list_query_vars', 0);
+
+// ------------------
+// 3. Insert the new endpoint into the My Account menu
+
+function saucal_employee_link_my_account($items)
+{
+    $items['saucal_employee'] = 'Saucal Employee List';
+    return $items;
+}
+
+add_filter('woocommerce_account_menu_items', 'saucal_employee_link_my_account');
+
+// ------------------
+// 4. Add content to the new tab
+
+function saucal_employee_list_content()
+{
+    $t = new HighestSalaryRange();
+    echo $t->getForm();
+}
+
+add_action('woocommerce_account_saucal_employee_endpoint', 'saucal_employee_list_content');
 
 add_filter('the_title', 'saucal_employee_list_endpoint_title');
 function saucal_employee_list_endpoint_title($title)
