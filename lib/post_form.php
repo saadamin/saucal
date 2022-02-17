@@ -4,7 +4,7 @@ class HighestSalaryRange
 {
     const NONCE_VALUE = 'HighestSalaryRange';
     const NONCE_FIELD = 'HighestSalaryRange_field';
-	
+
     protected $errors = array();
     protected $data = array();
 
@@ -41,7 +41,7 @@ class HighestSalaryRange
         if (!$this->isNonceValid())
             $this->errors[] = 'Security check failed, please try again.';
 
-        if (intval($data['HighestSalaryRange']) === 0 )
+        if (intval($data['HighestSalaryRange']) === 0)
             $this->errors[] = 'Please enter a valid number';
 
         if (!$this->errors) {
@@ -77,7 +77,7 @@ class HighestSalaryRange
             <form id="formpost" method="post">
                 <fieldset>
                     <label for="HighestSalaryRange">Highest salary range</label>
-                    <input type="number" name="HighestSalaryRange" id="HighestSalaryRange" value="<?php echo $max_employee ? esc_attr($max_employee); ?>" />
+                    <input type="number" name="HighestSalaryRange" id="HighestSalaryRange" value="<?php echo $max_employee ? esc_attr($max_employee)  : ''; ?>" />
                 </fieldset>
 
                 <fieldset>
