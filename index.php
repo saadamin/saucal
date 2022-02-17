@@ -31,7 +31,16 @@ function saucal_employee_endpoint()
 
 add_action('init', 'saucal_employee_endpoint');
 
+// ------------------
+// 2. Add new query var
 
+function saucal_employee_list_query_vars($vars)
+{
+    $vars[] = 'saucal_employee';
+    return $vars;
+}
+
+add_filter('query_vars', 'saucal_employee_list_query_vars', 0);
 
 // ------------------
 // 3. Insert the new endpoint into the My Account menu
